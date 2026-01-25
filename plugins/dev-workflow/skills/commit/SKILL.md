@@ -1,6 +1,8 @@
 ---
 name: commit
-description: ALWAYS USE THIS SKILL when the user asks to "commit changes", "create a commit", "make a commit", "git commit", "commit this", "commit my changes", "/commit", "save changes", or mentions wanting well-formatted git commits following conventional commit standards. This skill creates atomic commits with emoji indicators.
+description: ALWAYS USE THIS SKILL when the user asks to "commit changes", "create a commit", "git commit", "/commit", or mentions wanting well-formatted commits. Creates atomic, conventional commits with emoji indicators through 6-phase workflow: discovery (git status/diff), analysis (determine commit type and scope), user confirmation, staging, commit creation, and verification.
+argument-hint: [optional: files-to-commit]
+allowed-tools: Bash(git*), Bash(jq*), AskUserQuestion
 model: haiku
 context: fork
 ---

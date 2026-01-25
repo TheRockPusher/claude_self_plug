@@ -1,6 +1,10 @@
 ---
 name: plan
-description: ALWAYS USE THIS SKILL when the user asks to "create a plan", "plan implementation", "design a feature", "write implementation plan", "plan this feature", "create implementation strategy", "/plan", "plan out", "design approach", or mentions needing a comprehensive plan before coding. This skill creates detailed, context-rich implementation plans with validation commands.
+description: ALWAYS USE THIS SKILL when the user asks to "create a plan", "plan implementation", "design a feature", "/plan", or mentions needing a comprehensive plan before coding. Creates detailed implementation plans in .agents/plans/ through multi-phase analysis: codebase intelligence gathering (parallel Task agents), external research (llms.txt, Context7 MCP, web search), and strategic planning with mandatory 5-level validation commands.
+argument-hint: [feature-description]
+allowed-tools: Read, Grep, Glob, Bash(git status*), Bash(git log*), Bash(git ls-files*), Bash(git diff*), Task, WebFetch, WebSearch, Write, AskUserQuestion
+context: fork
+model: opus
 ---
 
 # Plan

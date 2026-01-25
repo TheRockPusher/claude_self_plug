@@ -1,6 +1,9 @@
 ---
 name: implement
-description: ALWAYS USE THIS SKILL when the user asks to "implement the plan", "execute the plan", "implement this feature", "build this", "code this", "/implement", "start implementation", "execute implementation", or mentions wanting to execute an implementation plan or feature request with mandatory validation. This skill executes plans with task tracking and validation iteration.
+description: ALWAYS USE THIS SKILL when the user asks to "implement the plan", "execute the plan", "build this", "/implement", or mentions executing an implementation plan. Executes plans from .agents/plans/ or inline feature requests with TodoWrite task tracking and mandatory 5-level validation iteration (lint, type-check, unit tests, integration tests, manual checks) until all checks pass.
+argument-hint: [plan-name or feature-description]
+allowed-tools: Read, Write, Edit, Grep, Glob, Bash(uv*), Bash(npm*), Bash(node*), Bash(cargo*), Bash(go*), Bash(make*), Bash(markdownlint*), TodoWrite, AskUserQuestion
+context: fork
 ---
 
 # Implement
