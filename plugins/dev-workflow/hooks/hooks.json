@@ -1,0 +1,17 @@
+{
+  "description": "Markdown linting hook - auto-fixes and reports remaining issues",
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ${CLAUDE_PLUGIN_ROOT}/hooks/lint-markdown.sh",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  }
+}
