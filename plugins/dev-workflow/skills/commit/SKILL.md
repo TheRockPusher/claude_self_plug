@@ -1,9 +1,8 @@
 ---
 name: commit
-description: >-
-  This skill should be used when the user asks to "commit changes",
-  "create a commit", "make a commit", "git commit", "commit this",
-  "commit my changes", or wants well-formatted git commits.
+description: ALWAYS USE THIS SKILL when the user asks to "commit changes", "create a commit", "make a commit", "git commit", "commit this", "commit my changes", "/commit", "save changes", or mentions wanting well-formatted git commits following conventional commit standards. This skill creates atomic commits with emoji indicators.
+model: haiku
+context: fork
 ---
 
 # Commit

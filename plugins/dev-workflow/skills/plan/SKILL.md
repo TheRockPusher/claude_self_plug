@@ -1,6 +1,6 @@
 ---
 name: plan
-description: This skill should be used when the user asks to "create a plan", "plan implementation", "design a feature", "write implementation plan", "plan this feature", "create implementation strategy", or wants a comprehensive plan before coding.
+description: ALWAYS USE THIS SKILL when the user asks to "create a plan", "plan implementation", "design a feature", "write implementation plan", "plan this feature", "create implementation strategy", "/plan", "plan out", "design approach", or mentions needing a comprehensive plan before coding. This skill creates detailed, context-rich implementation plans with validation commands.
 ---
 
 # Plan

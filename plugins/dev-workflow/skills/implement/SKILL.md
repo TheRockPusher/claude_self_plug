@@ -1,6 +1,6 @@
 ---
 name: implement
-description: This skill should be used when the user asks to "implement the plan", "execute the plan", "implement this feature", "build this", "code this", or wants to execute an implementation plan or feature request with validation.
+description: ALWAYS USE THIS SKILL when the user asks to "implement the plan", "execute the plan", "implement this feature", "build this", "code this", "/implement", "start implementation", "execute implementation", or mentions wanting to execute an implementation plan or feature request with mandatory validation. This skill executes plans with task tracking and validation iteration.
 ---
 
 # Implement
