@@ -21,12 +21,11 @@ and create clean commit history.
 
 Run these commands to gather context:
 
-```bash
-git status
-git diff --staged
-git diff
-git log -5 --oneline
-```
+- Status: !`git status`
+- Staged diff: !`git diff --staged`
+- Diff: !`git diff`
+- Log: !`git log -5 --oneline`
+
 
 ### Phase 2: Validation
 
