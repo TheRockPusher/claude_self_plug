@@ -1,5 +1,5 @@
 ---
-name: Primer
+name: primer
 description: This skill should be used when the user asks to "map the codebase", "generate context docs", "create architecture docs", "document conventions", "prime context", "analyse project structure", "create a primer", or wants persistent codebase documentation that survives sessions.
 ---
 

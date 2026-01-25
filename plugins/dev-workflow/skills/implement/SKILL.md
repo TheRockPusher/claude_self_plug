@@ -1,5 +1,5 @@
 ---
-name: Implement
+name: implement
 description: This skill should be used when the user asks to "implement the plan", "execute the plan", "implement this feature", "build this", "code this", or wants to execute an implementation plan or feature request with validation.
 ---
 

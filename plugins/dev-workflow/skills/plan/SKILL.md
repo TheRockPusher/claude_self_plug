@@ -1,5 +1,5 @@
 ---
-name: Plan
+name: plan
 description: This skill should be used when the user asks to "create a plan", "plan implementation", "design a feature", "write implementation plan", "plan this feature", "create implementation strategy", or wants a comprehensive plan before coding.
 ---
 
