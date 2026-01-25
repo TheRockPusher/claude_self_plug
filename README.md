@@ -8,6 +8,14 @@ A personal collection of plugins for [Claude Code](https://docs.anthropic.com/en
 |--------|-------------|----------|
 | [dev-workflow](plugins/dev-workflow/) | Development workflow: context priming, planning, implementation, git commits | 4 skills, 1 hook |
 
+## Other Installed Plugins
+
+This project uses additional Claude Code plugins for development:
+
+| Plugin                                                                                                           | Purpose                                                                                         | Installation                                              |
+|------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------|-----------------------------------------------------------|
+| [plugin-dev@claude-plugins-official](https://github.com/anthropics/claude-plugins/tree/main/plugins/plugin-dev) | Plugin development toolkit with agents, skills, and hooks for creating Claude Code plugins | `/plugin install plugin-dev@claude-plugins-official` |
+
 ## Installation
 
 ### Via marketplace (recommended)
