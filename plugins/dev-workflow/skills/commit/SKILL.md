@@ -26,7 +26,6 @@ Run these commands to gather context:
 - Diff: !`git diff`
 - Log: !`git log -5 --oneline`
 
-
 ### Phase 2: Validation
 
 **Fail fast if:**
@@ -87,22 +86,6 @@ Analyse the diff to identify:
 - Require confirmation for commits >500 lines changed
 - For splits: guide user through `git add -p` if needed
 
-## Commit Type Reference
-
-- **feat**: ✨ New feature
-- **fix**: 🩹 Bug fix (minor)
-- **fix**: 🚑️ Critical hotfix
-- **refactor**: 🔨 Code restructure
-- **perf**: ⚡ Performance improvement
-- **test**: 🚦 Test additions/changes
-- **docs**: 📜 Documentation
-- **style**: 💅 Formatting/style
-- **build**: 📦 Build system/deps
-- **ci**: 🦊 CI configuration
-- **chore**: 🧹 Maintenance tasks
-- **debug**: 🧪 Debugging changes
-- **BREAKING**: 💣 Breaking changes
-
 ## Constraints
 
 - **Never commit secrets**: .env, secrets.*, *.key, credentials.*
@@ -120,31 +103,11 @@ Suggestion: Single logical change, creating commit:
 → feat: ✨ add OAuth2 authentication flow
 ```
 
-## Example Commit Messages
+## Reference Documentation
 
-**Simple:**
+For detailed information on commit formats and conventions:
 
-```text
-feat: ✨ add user authentication system
-```
-
-**With scope:**
-
-```text
-feat(auth): ✨ add user authentication system
-```
-
-**With body:**
-
-```text
-feat(auth): ✨ add user authentication system
-
-Implements JWT-based authentication with:
-- Login endpoint with credentials validation
-- Token generation and verification
-- Protected route middleware
-```
-
-## Reference
-
-[Conventional Commits](https://www.conventionalcommits.org/)
+- **`references/conventional-commits.md`** — Conventional commits specification,
+  structure, types, breaking changes, and footers
+- **`references/commit-templates.md`** — Commit message templates with emoji
+  indicators for all commit types
