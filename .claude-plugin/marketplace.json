@@ -1,0 +1,17 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "claude-self-plug",
+  "description": "Personal collection of Claude Code plugins",
+  "owner": {
+    "name": "TheRockPusher"
+  },
+  "plugins": [
+    {
+      "name": "dev-workflow",
+      "source": "./plugins/dev-workflow",
+      "description": "Development workflow: context priming, planning, implementation, git commits",
+      "category": "development",
+      "keywords": ["workflow", "planning", "implementation", "context", "git"]
+    }
+  ]
+}

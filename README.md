@@ -1,126 +1,80 @@
 # Claude Code Plugin Marketplace
 
-A collection of plugins for
-[Claude Code](https://docs.anthropic.com/en/docs/claude-code) - Anthropic's
-official CLI for Claude.
+A personal collection of plugins for [Claude Code](https://docs.anthropic.com/en/docs/claude-code).
 
-## Prerequisites
+## Plugin Catalog
 
-### System Requirements
+| Plugin | Description | Includes |
+|--------|-------------|----------|
+| [dev-workflow](plugins/dev-workflow/) | Development workflow: context priming, planning, implementation, git commits | 4 skills, 1 hook |
 
-- **Node.js** (v18 or higher) - Required for markdown linting hooks
-- **jq** - JSON processor for hook scripts
+## Installation
 
-### Installation
-
-**Ubuntu/Debian:**
+### Via marketplace (recommended)
 
 ```bash
-sudo apt install nodejs npm jq
+# Add this marketplace
+/plugin marketplace add owner/claude_self_plug
+
+# Install a plugin
+/plugin install dev-workflow@claude-self-plug
 ```
 
-**Arch Linux:**
+### Direct installation
 
 ```bash
-sudo pacman -S nodejs npm jq
+# Clone and add a plugin directly
+git clone https://github.com/owner/claude_self_plug.git
+claude settings plugins add ~/claude_self_plug/plugins/dev-workflow
 ```
 
-**macOS:**
+### Test temporarily
 
 ```bash
-brew install node jq
+claude --plugin-dir /path/to/plugins/<plugin-name>
 ```
 
-### NPM Dependencies
+## Adding New Plugins
 
-Install the required Node.js packages:
+1. Create a new directory under `plugins/`:
 
-```bash
-npm install markdownlint-cli2
-```
+   ```text
+   plugins/my-plugin/
+   ├── .claude-plugin/
+   │   └── plugin.json
+   ├── skills/
+   ├── hooks/
+   └── README.md
+   ```
 
-Or let the hooks install them automatically via `npx` on first use.
+2. Add `plugin.json` with metadata:
 
-## Plugins
+   ```json
+   {
+     "name": "my-plugin",
+     "version": "0.1.0",
+     "description": "What it does"
+   }
+   ```
 
-**dev-workflow** - [plugins/dev-workflow/](plugins/dev-workflow/)
+3. Add skills, hooks, or agents as needed
 
-Development workflow skills: context priming, planning, implementation
+4. Add to `.claude-plugin/marketplace.json`:
 
-## Plugin Installation
+   ```json
+   {
+     "name": "my-plugin",
+     "source": "./plugins/my-plugin",
+     "description": "What it does",
+     "category": "development"
+   }
+   ```
 
-```bash
-# Add a plugin to Claude Code
-claude settings plugins add /path/to/plugins/dev-workflow
+5. Update this README's plugin catalog table
 
-# Or use --plugin-dir for testing
-cc --plugin-dir /path/to/plugins/dev-workflow
-```
+## Legacy Reference
 
-## Repository Structure
-
-```text
-claude_self_plug/
-├── plugins/
-│   └── dev-workflow/
-│       ├── .claude-plugin/
-│       │   └── plugin.json
-│       ├── skills/
-│       │   ├── primer/
-│       │   ├── plan/
-│       │   └── implement/
-│       ├── hooks/
-│       │   ├── hooks.json
-│       │   └── lint-markdown.sh
-│       └── README.md
-├── reference/
-│   └── .claude/
-│       ├── commands/
-│       └── settings.local.json
-└── README.md
-```
-
-## Skills Overview
-
-### primer
-
-Generate persistent context documents that prime future AI sessions. Output
-stored in `.agents/context/`:
-
-- **ARCHITECTURE.md** - Structure, patterns, components, tooling
-- **CONVENTIONS.md** - Code style, naming, testing standards
-- **CODE-MAP.md** - File purposes and organization
-
-**Trigger phrases:** "map the codebase", "prime context", "create architecture docs"
-
-### plan
-
-Transform feature requests into comprehensive implementation plans. Output
-stored in `.agents/plans/`:
-
-- Codebase intelligence gathering via parallel analysis
-- External documentation research
-- Step-by-step tasks with validation commands
-- Confidence scoring (1-10)
-
-**Trigger phrases:** "create a plan", "plan implementation", "design a feature"
-
-### implement
-
-Execute implementation plans with task tracking and validation:
-
-- Mandatory context loading before implementation
-- Task tracking with TaskCreate/TaskUpdate
-- 5-level validation iteration (lint, types, unit tests, integration tests,
-  manual)
-- Completion reporting with metrics
-
-**Trigger phrases:** "implement the plan", "execute the plan", "build this"
-
-## Hooks
-
-The dev-workflow plugin includes a PostToolUse hook that automatically lints
-markdown files after Write or Edit operations using `markdownlint-cli2`.
+The `reference/` directory contains legacy commands and settings for reference purposes.
 
 ## License
 

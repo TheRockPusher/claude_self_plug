@@ -3,6 +3,41 @@
 Development workflow skills for Claude Code: context priming, implementation
 planning, and execution with validation.
 
+## Prerequisites
+
+### System Requirements
+
+- **Node.js** (v18+) - Required for markdown linting hook
+- **jq** - JSON processor for hook scripts
+
+### Installation
+
+**Ubuntu/Debian:**
+
+```bash
+sudo apt install nodejs npm jq
+```
+
+**Arch Linux:**
+
+```bash
+sudo pacman -S nodejs npm jq
+```
+
+**macOS:**
+
+```bash
+brew install node jq
+```
+
+### NPM Dependencies
+
+```bash
+npm install markdownlint-cli2
+```
+
+Or let the hook install it automatically via `npx` on first use.
+
 ## Skills
 
 ### primer
