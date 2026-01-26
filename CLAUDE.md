@@ -1,14 +1,17 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance to Claude Code (claude.ai/code) when working
+with code in this repository.
 
 ## Repository Purpose
 
-This is a personal Claude Code plugin marketplace repository that hosts custom plugins for enhancing Claude Code's capabilities. The primary focus is development workflow automation through the `dev-workflow` plugin.
+This is a personal Claude Code plugin marketplace repository that hosts
+custom plugins for enhancing Claude Code's capabilities. The primary focus
+is development workflow automation through the `dev-workflow` plugin.
 
 ## Repository Structure
 
-```
+```text
 .
 ├── .claude-plugin/
 │   └── marketplace.json          # Marketplace manifest defining available plugins
@@ -76,9 +79,12 @@ description: Trigger phrases and when this skill should be used
 [Skill implementation instructions...]
 ```
 
-**Critical**: Skill names MUST be lowercase to appear in Claude Code's skill menu. The `description` field in frontmatter defines when the skill should be triggered.
+**Critical**: Skill names MUST be lowercase to appear in Claude Code's
+skill menu. The `description` field in frontmatter defines when the skill
+should be triggered.
 
-Skills may reference supporting files in `references/` subdirectory for templates or additional documentation.
+Skills may reference supporting files in `references/` subdirectory for
+templates or additional documentation.
 
 ### Hook Structure
 
@@ -103,13 +109,15 @@ Hooks are defined in `hooks/hooks.json`:
 }
 ```
 
-Hook scripts receive tool use data via stdin as JSON and can output structured feedback to Claude.
+Hook scripts receive tool use data via stdin as JSON and can output
+structured feedback to Claude.
 
 ## dev-workflow Plugin
 
 The dev-workflow plugin implements a three-phase development workflow:
 
 ### Phase 1: Primer (`/primer`)
+
 - Analyzes codebase using `git ls-files` and parallel Task agents
 - Generates persistent context docs in `.agents/context/`:
   - `ARCHITECTURE.md` — Structure, patterns, components
@@ -118,6 +126,7 @@ The dev-workflow plugin implements a three-phase development workflow:
 - Uses AskUserQuestion for approval before writing
 
 ### Phase 2: Plan (`/plan`)
+
 - Creates implementation plans in `.agents/plans/{feature-name}.md`
 - Launches parallel agents for codebase intelligence gathering
 - Researches external documentation (llms.txt, Context7 MCP, official docs)
@@ -125,6 +134,7 @@ The dev-workflow plugin implements a three-phase development workflow:
 - Assigns confidence score (1-10)
 
 ### Phase 3: Implement (`/implement`)
+
 - Executes plans with mandatory validation iteration loop
 - Loads context from `.agents/context/` before coding
 - Uses TodoWrite to track progress
@@ -132,6 +142,7 @@ The dev-workflow plugin implements a three-phase development workflow:
 - Produces completion report
 
 ### Commit (`/commit`)
+
 - Formats git commits following project conventions
 
 ## Adding New Plugins
@@ -160,7 +171,9 @@ claude --plugin-dir ./plugins/dev-workflow
 ## Validation and Quality
 
 The dev-workflow plugin enforces markdown linting via PostToolUse hook:
-- Automatically runs `markdownlint-cli2 --fix` after Write/Edit operations on `.md` files
+
+- Automatically runs `markdownlint-cli2 --fix` after Write/Edit operations
+  on `.md` files
 - Reports remaining lint errors back to Claude for manual fixing
 - Requires Node.js and `markdownlint-cli2` (installed via npx)
 
@@ -172,10 +185,13 @@ The dev-workflow plugin enforces markdown linting via PostToolUse hook:
 - Hook scripts: Use `${CLAUDE_PLUGIN_ROOT}` for plugin-relative paths
 - Validation: Always include executable commands in plans
 - Never glob: `.venv/`, `node_modules/`, `dist/`, `build/`, `.git/`
+- Version bumping: Always bump plugin version in `plugin.json` before pushing.
+  If uncertain about the bump type (major/minor/patch), ask the user
 
 ## Prerequisites
 
 For dev-workflow plugin:
+
 - Node.js (v18+) for markdown linting
 - jq for JSON processing in hooks
 - Git repository (for `git ls-files` discovery)
