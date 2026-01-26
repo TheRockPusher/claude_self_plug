@@ -36,6 +36,20 @@ Use the template in `references/plan-template.md`.
 3. Note required tools, testing frameworks, and validation commands
 4. Identify any AI-specific instructions that override defaults
 
+### Phase 0.5: Load Primer Context
+
+**If `.agents/context/` exists, load these files before analysis:**
+
+| File | What to Extract |
+| --- | --- |
+| `ARCHITECTURE.md` | Structure, components, dependencies, entry points |
+| `CONVENTIONS.md` | Naming, imports, error handling, logging patterns |
+| `CODE-MAP.md` | File organisation, module purposes |
+
+This context from the primer skill accelerates Phase 2 analysis and ensures
+consistency with documented project patterns. Skip redundant discovery if
+primer docs are comprehensive and recent.
+
 ### Phase 1: Feature Understanding
 
 Analyse the request:
@@ -50,34 +64,51 @@ Analyse the request:
 
 ### Phase 2: Codebase Intelligence Gathering
 
-Launch parallel analysis agents:
+Launch parallel **Explore agents** (Task tool with `subagent_type=Explore`):
 
-- **Structure**: Languages, frameworks, directory patterns, config files
-- **Patterns**: Similar implementations, naming, error handling, logging
-- **Testing**: Framework, structure, coverage, similar test examples
-- **Integration**: Files needing updates, new files, registration patterns
+| Agent | Focus |
+| --- | --- |
+| Structure | Languages, frameworks, directory patterns, config files |
+| Patterns | Similar implementations, naming, error handling, logging |
+| Testing | Framework, structure, coverage, similar test examples |
+| Integration | Files needing updates, new files, registration patterns |
 
-**For each agent, extract:**
+**For each Explore agent, extract:**
 
 - Specific file paths with line numbers
 - Real code examples (not placeholders)
 - Anti-patterns to avoid
 
+**Note:** If primer context (Phase 0.5) already covers an area comprehensively,
+skip that agent and reference the primer docs instead.
+
 ### Phase 3: External Research
+
+Launch parallel **general-purpose agents** (one per documentation source):
+
+| Agent | Task |
+| --- | --- |
+| LLMs.txt | Fetch `https://{domain}/llms.txt` or `/llms-full.txt` |
+| Context7 | Use MCP if available (`resolve-library-id` + `get-library-docs`) |
+| Official Docs | Fetch official documentation with section anchors |
+| Web Search | Search for specific implementation patterns (last resort) |
 
 **Documentation lookup priority:**
 
-1. Check `https://{domain}/llms.txt` or `/llms-full.txt`
-2. Use Context7 MCP if available (`resolve-library-id` + `get-library-docs`)
-3. Official documentation with section anchors
-4. Web search as last resort
+1. llms.txt files (AI-optimised documentation)
+2. Context7 MCP (if available)
+3. Official documentation
+4. Web search
 
-**Gather:**
+**For each agent, gather:**
 
 - Latest library versions and best practices
 - Implementation examples
 - Common gotchas and known issues
 - Breaking changes and migration guides
+
+**Note:** Only launch agents for libraries/frameworks relevant to the feature.
+Skip agents for well-understood or already-documented dependencies.
 
 ### Phase 4: Strategic Thinking
 
