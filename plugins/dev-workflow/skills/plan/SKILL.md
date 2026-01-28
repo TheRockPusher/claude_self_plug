@@ -1,7 +1,7 @@
 ---
 name: plan
 description: ALWAYS USE THIS SKILL when the user asks to "create a plan", "plan implementation", "design a feature", "/plan", or mentions needing a comprehensive plan before coding. Creates detailed implementation plans in .agents/plans/ through multi-phase analysis: codebase intelligence gathering (parallel Task agents), external research (llms.txt, Context7 MCP, web search), and strategic planning with mandatory 5-level validation commands.
-argument-hint: [feature-description]
+argument-hint: <feature-description | brainstorm-filename>
 allowed-tools: Read, Grep, Glob, Bash(git status*), Bash(git log*), Bash(git ls-files*), Bash(git diff*), Task, WebFetch, WebSearch, Write, AskUserQuestion
 context: fork
 model: opus
@@ -52,15 +52,9 @@ primer docs are comprehensive and recent.
 
 ### Phase 0.75: Load Brainstorm Context
 
-**If a brainstorm document exists in `.agents/brainstorms/`, load it:**
+**If the argument is a brainstorm filename, load it as primary input:**
 
-Check for relevant brainstorm files:
-
-```bash
-ls .agents/brainstorms/
-```
-
-If a matching brainstorm exists:
+Check if `.agents/brainstorms/{argument}.md` exists. If so, read it and extract:
 
 | Section | What to Extract |
 | --- | --- |
@@ -70,9 +64,8 @@ If a matching brainstorm exists:
 | Simplifications | What NOT to build (YAGNI decisions) |
 | Open Questions | Items needing resolution before coding |
 
-Brainstorm documents accelerate Phase 1 understanding and ensure the plan
-aligns with decisions already made. Reference the brainstorm file in the
-plan's context section.
+The brainstorm document becomes the primary input, replacing Phase 1 discovery.
+Reference the brainstorm file in the plan's context section.
 
 ### Phase 1: Feature Understanding
 

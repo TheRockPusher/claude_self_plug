@@ -1,6 +1,6 @@
 {
   "name": "dev-workflow",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Development workflow skills: brainstorming, context priming, implementation planning, execution with validation, and git commit formatting",
   "author": {
     "name": "TheRockPusher"
