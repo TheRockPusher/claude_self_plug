@@ -50,6 +50,30 @@ This context from the primer skill accelerates Phase 2 analysis and ensures
 consistency with documented project patterns. Skip redundant discovery if
 primer docs are comprehensive and recent.
 
+### Phase 0.75: Load Brainstorm Context
+
+**If a brainstorm document exists in `.agents/brainstorms/`, load it:**
+
+Check for relevant brainstorm files:
+
+```bash
+ls .agents/brainstorms/
+```
+
+If a matching brainstorm exists:
+
+| Section | What to Extract |
+| --- | --- |
+| Problem Statement | Core problem and context |
+| Constraints | Hard and soft constraints to respect |
+| Chosen Solution | Approach to implement |
+| Simplifications | What NOT to build (YAGNI decisions) |
+| Open Questions | Items needing resolution before coding |
+
+Brainstorm documents accelerate Phase 1 understanding and ensure the plan
+aligns with decisions already made. Reference the brainstorm file in the
+plan's context section.
+
 ### Phase 1: Feature Understanding
 
 Analyse the request:
