@@ -9,6 +9,29 @@ This is a personal Claude Code plugin marketplace repository that hosts
 custom plugins for enhancing Claude Code's capabilities. The primary focus
 is development workflow automation through the `dev-workflow` plugin.
 
+## Plugin Development (CRITICAL)
+
+**ALWAYS use the `plugin-dev` skillset** when working on plugins in this
+repository. The `plugin-dev@claude-plugins-official` plugin provides
+specialized agents and skills for:
+
+- Creating new plugins (`plugin-dev:create-plugin`)
+- Developing agents (`plugin-dev:agent-development`)
+- Building slash commands (`plugin-dev:command-development`)
+- Implementing hooks (`plugin-dev:hook-development`)
+- Configuring MCP servers (`plugin-dev:mcp-integration`)
+- Managing plugin settings (`plugin-dev:plugin-settings`)
+- Structuring plugins (`plugin-dev:plugin-structure`)
+- Writing skills (`plugin-dev:skill-development`)
+
+Before creating or modifying any plugin component, invoke the appropriate
+plugin-dev skill to ensure correct structure and best practices. Example:
+
+```text
+User: "Add a new skill to dev-workflow"
+Claude: [Invokes plugin-dev:skill-development skill first]
+```
+
 ## Repository Structure
 
 ```text
