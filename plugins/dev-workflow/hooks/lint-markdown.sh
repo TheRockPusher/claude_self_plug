@@ -20,11 +20,15 @@ fi
 # Use npx to run markdownlint-cli2 (works with local or global install)
 LINT_CMD="npx --yes markdownlint-cli2"
 
+# Config file bundled with the plugin
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+CONFIG_FILE="$SCRIPT_DIR/.markdownlint.json"
+
 # Step 1: Auto-fix what can be fixed
-$LINT_CMD --fix "$file_path" 2>/dev/null || true
+$LINT_CMD --config "$CONFIG_FILE" --fix "$file_path" 2>/dev/null || true
 
 # Step 2: Re-check for remaining issues
-lint_output=$($LINT_CMD "$file_path" 2>&1) || lint_exit=$?
+lint_output=$($LINT_CMD --config "$CONFIG_FILE" "$file_path" 2>&1) || lint_exit=$?
 
 if [[ -n "${lint_exit:-}" ]] && [[ "$lint_exit" -ne 0 ]]; then
   # There are remaining issues - report them back to Claude
