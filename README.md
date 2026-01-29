@@ -4,17 +4,25 @@ A personal collection of plugins for [Claude Code](https://docs.anthropic.com/en
 
 ## Plugin Catalog
 
-| Plugin | Description | Includes |
-|--------|-------------|----------|
+| Plugin                                | Description                                                                  | Includes         |
+| ------------------------------------- | ---------------------------------------------------------------------------- | ---------------- |
 | [dev-workflow](plugins/dev-workflow/) | Development workflow: context priming, planning, implementation, git commits | 4 skills, 1 hook |
 
 ## Other Installed Plugins
 
 This project uses additional Claude Code plugins for development:
 
-| Plugin                                                                                                           | Purpose                                                                                         | Installation                                              |
-|------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------|-----------------------------------------------------------|
-| [plugin-dev@claude-plugins-official](https://github.com/anthropics/claude-plugins/tree/main/plugins/plugin-dev) | Plugin development toolkit with agents, skills, and hooks for creating Claude Code plugins | `/plugin install plugin-dev@claude-plugins-official` |
+| Plugin                                                                                                           | Purpose                                                                                      | Installation                                         |
+| ---------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
+| [plugin-dev@claude-plugins-official](https://github.com/anthropics/claude-plugins/tree/main/plugins/plugin-dev) | Plugin development toolkit with agents, skills, and hooks for creating Claude Code plugins   | `/plugin install plugin-dev@claude-plugins-official` |
+
+## Other Useful Plugins
+
+Community plugins worth checking out:
+
+| Plugin                                                       | Description                          |
+| ------------------------------------------------------------ | ------------------------------------ |
+| [obsidian-skills](https://github.com/kepano/obsidian-skills) | Skills for working with Obsidian vaults |
 
 ## Installation
 
