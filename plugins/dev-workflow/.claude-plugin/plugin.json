@@ -1,9 +1,9 @@
 {
   "name": "dev-workflow",
   "version": "0.3.1",
-  "description": "Development workflow skills: brainstorming, context priming, implementation planning, execution with validation, and git commit formatting",
+  "description": "Development workflow skills: brainstorming, context priming, implementation planning, execution with validation, git commit formatting, and README generation",
   "author": {
     "name": "TheRockPusher"
   },
-  "keywords": ["development", "workflow", "brainstorm", "planning", "implementation", "context", "git", "commit"]
+  "keywords": ["development", "workflow", "brainstorm", "planning", "implementation", "context", "git", "commit", "readme", "documentation"]
 }
