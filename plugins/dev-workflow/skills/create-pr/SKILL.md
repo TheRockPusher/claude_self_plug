@@ -25,7 +25,9 @@ Collect repository and change state:
 - Status: !`git status`
 - Current branch: !`git branch --show-current`
 - Default branch:
-  !`git remote show origin 2>/dev/null | grep 'HEAD branch' | awk '{print $NF}'`
+  !`git remote show origin 2>/dev/null`
+  Parse the "HEAD branch:" line from the output to determine the
+  default branch name
 - Staged diff: !`git diff --staged --stat`
 - Full diff: !`git diff HEAD --stat`
 - Recent commits on branch: !`git log --oneline -20`
@@ -179,21 +181,42 @@ Ask the user to confirm or request changes. Iterate until approved.
 
 Create the PR/MR using the detected platform CLI.
 
-For GitHub:
+**For GitHub:**
 
 ```bash
 gh pr create --title "<title>" --base "<base-branch>" \
-  --body "<body>"
+  --body "$(cat <<'EOF'
+<body>
+EOF
+)"
 ```
 
-For GitLab:
+**For GitLab:**
+
+Consult `references/glab-reference.md` for the full flag reference
+and known gotchas. Key points:
+
+- glab uses `--description` (not `--body`) and `--target-branch`
+  (not `--base`)
+- Non-interactive mode requires BOTH `--title` AND `--description`
+- Always pass `--yes` to skip the confirmation prompt
+- Always double-quote shell variables to prevent word-splitting errors
+- Use HEREDOC via command substitution for multi-line descriptions
 
 ```bash
 glab mr create --title "<title>" \
-  --target-branch "<base-branch>" --description "<body>"
+  --target-branch "<base-branch>" \
+  --description "$(cat <<'EOF'
+<body>
+EOF
+)" --yes
 ```
 
-After creation:
+**Do NOT use `--fill`** unless the user explicitly asks for it,
+because `--fill` implicitly pushes the branch and overrides the
+crafted title and description.
+
+**After creation:**
 
 - Display the PR/MR URL
 - Show a brief summary of what was created
@@ -204,17 +227,19 @@ default branch.
 
 ## Constraints
 
+- **No AI attribution**: NEVER add "Generated with Claude Code",
+  "Co-Authored-By: Claude", "Created by Claude", "AI-generated",
+  or ANY similar attribution text to the PR/MR title, description,
+  or commit messages. The PR/MR must read as if written by the user
 - **Never force-push** without explicit user approval
 - **Never push to default branch** directly
 - **Always confirm** the PR title and description before creation
 - **Preserve existing commits**: Do not amend, squash, or rebase without
   user request
-- **No Claude attribution**: Do not add "Generated with Claude" or
-  co-author tags to the PR description
 
 ## Reference Documentation
 
-For detailed templates and best practices:
+For detailed templates, best practices, and CLI references:
 
 - **`references/pr-templates.md`** -- Three-tier PR description templates
   inspired by React, Kubernetes, Angular, and other major OSS projects.
@@ -222,3 +247,8 @@ For detailed templates and best practices:
 - **`references/pr-best-practices.md`** -- Synthesised best practices from
   14 major open source projects covering description quality, test evidence,
   review readiness, and common anti-patterns
+- **`references/glab-reference.md`** -- Complete glab CLI reference for
+  merge request creation. Includes all `glab mr create` flags, non-interactive
+  usage patterns, multi-line description techniques, known gotchas, and
+  a flag mapping between `glab` and `gh`. **Consult this before running
+  any glab command.**
