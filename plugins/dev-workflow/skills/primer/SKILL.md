@@ -1,6 +1,6 @@
 ---
 name: primer
-description: ALWAYS USE THIS SKILL when the user asks to "map the codebase", "generate context docs", "create architecture docs", "document conventions", "prime context", "/primer", or mentions persistent codebase documentation. Generates three persistent documents (ARCHITECTURE.md, CONVENTIONS.md, CODE-MAP.md) in .agents/context/ using parallel Task agents to analyze project structure, patterns, and conventions.
+description: Generates three persistent documents (ARCHITECTURE.md, CONVENTIONS.md, CODE-MAP.md) in .agents/context/ using parallel Task agents to analyze project structure, patterns, and conventions. Use when the user asks to "map the codebase", "generate context docs", "create architecture docs", "document conventions", "prime context", "/primer", or mentions persistent codebase documentation.
 argument-hint: [optional: focus-area]
 allowed-tools: Read, Grep, Glob, Bash(git status*), Bash(git log*), Bash(git ls-files*), Bash(git diff*), Bash(mkdir*), Task, Write, AskUserQuestion
 context: fork
@@ -75,6 +75,17 @@ When documents already exist:
 ## Document Templates
 
 Refer to `references/output-templates.md` for the structure of each output document.
+
+## Focus Area Argument
+
+When a focus area is provided (e.g., `/primer testing`):
+
+- Generate only the most relevant document(s) for that area
+- Go deeper on the specified topic instead of broad coverage
+- Example: `/primer testing` → focus on test framework, patterns, fixtures
+  in CONVENTIONS.md and CODE-MAP.md, skip or slim down ARCHITECTURE.md
+
+When no argument is provided, generate all three documents at standard depth.
 
 ## Guidelines
 

@@ -1,6 +1,6 @@
 ---
 name: create-pr
-description: ALWAYS USE THIS SKILL when the user asks to "create a PR", "open a pull request", "create a merge request", "push and create PR", "submit PR", "create MR", "/create-pr", or mentions wanting to open a PR/MR for their changes. Orchestrates the full PR/MR creation workflow with intelligent branch management, conventional commit titles, and OSS-quality descriptions. Supports both GitHub (gh) and GitLab (glab).
+description: Orchestrates the full PR/MR creation workflow with intelligent branch management, conventional commit titles, and OSS-quality descriptions. Supports both GitHub (gh) and GitLab (glab). Use when the user asks to "create a PR", "open a pull request", "create a merge request", "push and create PR", "submit PR", "create MR", "/create-pr", or mentions wanting to open a PR/MR for their changes.
 argument-hint: "[optional: base-branch]"
 allowed-tools: Bash(git*), Bash(gh*), Bash(glab*), Bash(jq*), AskUserQuestion, Read
 model: haiku
@@ -175,7 +175,8 @@ Template: Standard
 [full description]
 ```
 
-Ask the user to confirm or request changes. Iterate until approved.
+Ask the user to confirm or request changes. Also ask whether to create
+as a **draft PR** (pass `--draft` flag). Iterate until approved.
 
 ### Phase 10: Create the PR/MR
 

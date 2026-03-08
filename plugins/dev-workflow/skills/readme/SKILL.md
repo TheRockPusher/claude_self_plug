@@ -1,8 +1,8 @@
 ---
 name: readme
-description: This skill should be used when the user asks to "create a README", "generate a README", "write a README", "update the README", "improve the README", "document this project", "add project documentation", "this repo needs a README", "/readme", or mentions needing project documentation for a repository. Generates comprehensive, standards-compliant README.md files with auto-detected project metadata and adaptive sections based on project type.
+description: Generates comprehensive, standards-compliant README.md files with auto-detected project metadata and adaptive sections based on project type. Use when the user asks to "create a README", "generate a README", "write a README", "update the README", "improve the README", "document this project", "add project documentation", "this repo needs a README", "/readme", or mentions needing project documentation for a repository.
 argument-hint: [--update] [--focus <section>]
-allowed-tools: Read, Grep, Glob, Bash(git ls-files*), Bash(git log*), Bash(git remote*), Bash(cat LICENSE*), Bash(ls*), Task, Write, Edit, AskUserQuestion
+allowed-tools: Read, Grep, Glob, Bash(git ls-files*), Bash(git log*), Bash(git remote*), Bash(git tag*), Bash(git describe*), Bash(cat LICENSE*), Bash(ls*), Task, Write, Edit, AskUserQuestion
 context: fork
 model: opus
 ---

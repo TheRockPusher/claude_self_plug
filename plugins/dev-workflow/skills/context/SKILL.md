@@ -1,6 +1,6 @@
 ---
 name: context
-description: This skill should be used when the user asks to "load context", "load dev context", "inject context", "/context", or when CLAUDE.md instructs "Always invoke /context at session start". Loads universal development principles and language-specific conventions based on detected project config files.
+description: Loads universal development principles and language-specific conventions based on detected project config files. Use when the user asks to "load context", "load dev context", "inject context", "/context", or when CLAUDE.md instructs "Always invoke /context at session start".
 allowed-tools: Read, Glob
 ---
 
@@ -44,10 +44,15 @@ For each detected language, read the corresponding context file.
 If multiple languages detected (e.g., monorepo with Python backend and
 JS frontend), load all relevant contexts.
 
-### 4. Silent Operation
+### 4. Confirmation Signal
 
-Do not output anything to chat. The context is now in working memory for
-the session.
+After loading all context, emit a single brief line:
+
+```text
+Context loaded: {languages detected, or "universal only"}
+```
+
+Do not output anything else to chat.
 
 ## Detection Logic
 

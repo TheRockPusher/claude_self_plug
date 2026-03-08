@@ -1,6 +1,6 @@
 ---
 name: brainstorm
-description: This skill should be used when the user asks to "brainstorm", "discuss an idea", "explore options", "think through a problem", "/brainstorm", or mentions wanting to talk through a development idea, issue, or new functionality before planning. Facilitates highly interactive dialogue to reach a simple, YAGNI-compliant solution written to .agents/brainstorms/.
+description: Facilitates highly interactive dialogue to reach a simple, YAGNI-compliant solution written to .agents/brainstorms/. Use when the user asks to "brainstorm", "discuss an idea", "explore options", "think through a problem", "/brainstorm", or mentions wanting to talk through a development idea, issue, or new functionality before planning.
 argument-hint: <topic> [--ref <previous-brainstorm>...]
 allowed-tools: Read, Grep, Glob, Bash(git ls-files*), AskUserQuestion, Write
 context: fork
@@ -135,15 +135,15 @@ Then ask which ones to load.
 
 ## Conversational Style
 
-**Be curious, not prescriptive.** The user knows their domain.
+**Adopt a curious, non-prescriptive tone.** Defer to user domain expertise.
 
-**One question at a time.** Let conversations flow naturally.
+**Ask one question at a time.** Allow conversations to flow naturally.
 
 **Summarise frequently.** "So far I understand X, Y, Z. Correct?"
 
-**Challenge assumptions.** "Why does it need to be real-time?"
+**Challenge assumptions directly.** "Why does it need to be real-time?"
 
-**Suggest simplifications.** "What if we started without feature X?"
+**Propose simplifications.** "What if we started without feature X?"
 
 ## Output Report
 

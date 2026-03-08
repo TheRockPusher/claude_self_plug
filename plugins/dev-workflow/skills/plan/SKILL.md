@@ -1,6 +1,6 @@
 ---
 name: plan
-description: ALWAYS USE THIS SKILL when the user asks to "create a plan", "plan implementation", "design a feature", "/plan", or mentions needing a comprehensive plan before coding. Creates detailed implementation plans in .agents/plans/ through multi-phase analysis: codebase intelligence gathering (parallel Task agents), external research (llms.txt, Context7 MCP, web search), and strategic planning with mandatory 5-level validation commands.
+description: Creates detailed implementation plans in .agents/plans/ through multi-phase analysis including codebase intelligence gathering, external research, and strategic planning with mandatory 5-level validation commands. Use when the user asks to "create a plan", "plan implementation", "design a feature", "/plan", or mentions needing a comprehensive plan before coding.
 argument-hint: <feature-description | brainstorm-filename>
 allowed-tools: Read, Grep, Glob, Bash(git status*), Bash(git log*), Bash(git ls-files*), Bash(git diff*), Task, WebFetch, WebSearch, Write, AskUserQuestion
 context: fork

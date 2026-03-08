@@ -1,6 +1,6 @@
 ---
 name: commit
-description: ALWAYS USE THIS SKILL when the user asks to "commit changes", "create a commit", "git commit", "/commit", or mentions wanting well-formatted commits. Creates atomic, conventional commits with emoji indicators through 6-phase workflow: discovery (git status/diff), analysis (determine commit type and scope), user confirmation, staging, commit creation, and verification.
+description: Creates atomic, conventional commits with emoji indicators through a 6-phase workflow including discovery, analysis, confirmation, staging, creation, and verification. Use when the user asks to "commit changes", "create a commit", "git commit", "/commit", or mentions wanting well-formatted commits.
 argument-hint: [optional: files-to-commit]
 allowed-tools: Bash(git*), Bash(jq*), AskUserQuestion
 model: haiku
@@ -57,7 +57,16 @@ Analyse the diff to identify:
 - Unrelated bug fixes
 - Test changes for unrelated features
 
-### Phase 5: Commit Creation
+### Phase 5: Confirmation
+
+Present the proposed commit to the user before executing:
+
+- Show diff summary and proposed commit message
+- Require confirmation for commits >500 lines changed
+- For splits: guide user through `git add -p` if needed
+- **Only proceed to commit after explicit user approval**
+
+### Phase 6: Commit Creation
 
 **Message Format:**
 
@@ -79,12 +88,6 @@ Analyse the diff to identify:
 
 <detailed explanation if needed>
 ```
-
-### Phase 6: Confirmation
-
-- Always show diff summary before committing
-- Require confirmation for commits >500 lines changed
-- For splits: guide user through `git add -p` if needed
 
 ## Constraints
 

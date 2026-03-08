@@ -1,6 +1,6 @@
 ---
 name: implement
-description: ALWAYS USE THIS SKILL when the user asks to "implement the plan", "execute the plan", "build this", "/implement", or mentions executing an implementation plan. Executes plans from .agents/plans/ or inline feature requests with TodoWrite task tracking and mandatory 5-level validation iteration (lint, type-check, unit tests, integration tests, manual checks) until all checks pass.
+description: Executes plans from .agents/plans/ or inline feature requests with TodoWrite task tracking and mandatory 5-level validation iteration until all checks pass. Use when the user asks to "implement the plan", "execute the plan", "build this", "/implement", or mentions executing an implementation plan.
 argument-hint: [plan-name or feature-description]
 allowed-tools: Read, Write, Edit, Grep, Glob, Bash(uv*), Bash(npm*), Bash(node*), Bash(cargo*), Bash(go*), Bash(make*), Bash(markdownlint*), TodoWrite, AskUserQuestion
 context: fork
@@ -53,7 +53,7 @@ This ensures pattern consistency across implementation.
 
 ### Phase 2: Task Setup
 
-**Create tasks from "STEP-BY-STEP TASKS" section using TaskCreate:**
+**Create tasks from "STEP-BY-STEP TASKS" section using TodoWrite:**
 
 ```text
 Example plan tasks:
@@ -61,14 +61,14 @@ Example plan tasks:
 ### UPDATE src/routes/api.py
 ### ADD tests/test_auth.py
 
-Becomes tasks:
+Becomes todos:
 1. Create src/services/auth.py
 2. Update src/routes/api.py
 3. Add tests/test_auth.py
 4. Run validation commands
 ```
 
-Use TaskUpdate to mark first task as `in_progress` before starting.
+Use TodoWrite to mark first task as `in_progress` before starting.
 
 ### Phase 3: Execute Tasks
 
@@ -88,8 +88,8 @@ For EACH task in order:
 #### c. Verify and update
 
 - Check syntax after changes
-- Use TaskUpdate to mark task `completed`
-- Use TaskUpdate to mark next task `in_progress`
+- Use TodoWrite to mark task `completed`
+- Use TodoWrite to mark next task `in_progress`
 
 ### Phase 4: Testing
 
