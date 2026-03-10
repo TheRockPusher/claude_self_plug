@@ -4,9 +4,9 @@ A personal collection of plugins for [Claude Code](https://docs.anthropic.com/en
 
 ## Plugin Catalog
 
-| Plugin                                | Description                                                                  | Includes         |
-| ------------------------------------- | ---------------------------------------------------------------------------- | ---------------- |
-| [dev-workflow](plugins/dev-workflow/) | Development workflow: context priming, planning, implementation, git commits | 4 skills, 1 hook |
+| Plugin                                | Description                                                                                                                  | Includes          |
+| ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ----------------- |
+| [dev-workflow](plugins/dev-workflow/) | Development workflow: brainstorming, context priming, planning, implementation, git commits, PR creation, README generation  | 8 skills, 4 hooks |
 
 ## Other Installed Plugins
 

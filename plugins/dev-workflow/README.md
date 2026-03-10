@@ -1,16 +1,22 @@
 # dev-workflow
 
-Development workflow skills for Claude Code: context priming, implementation
-planning, and execution with validation.
+Development workflow plugin for [Claude Code](https://docs.anthropic.com/en/docs/claude-code):
+brainstorming, context priming, implementation planning, execution with
+validation, git commits, PR/MR creation, and README generation.
+
+**Version**: 0.4.0
+**License**: [MIT](../../LICENSE)
+**Author**: TheRockPusher
 
 ## Prerequisites
 
 ### System Requirements
 
-- **Node.js** (v18+) - Required for markdown linting hook
-- **jq** - JSON processor for hook scripts
+- **Node.js** (v18+) — required for markdown linting hook
+- **jq** — JSON processor for hook scripts
+- **Git** — repository context discovery
 
-### Installation
+### Installing Prerequisites
 
 **Ubuntu/Debian:**
 
@@ -38,25 +44,6 @@ npm install markdownlint-cli2
 
 Or let the hook install it automatically via `npx` on first use.
 
-## Skills
-
-### primer
-
-- **Trigger Phrases**: "map the codebase", "prime context", "create architecture
-  docs"
-- **Purpose**: Generate persistent context documents
-
-### plan
-
-- **Trigger Phrases**: "create a plan", "plan implementation", "design a
-  feature"
-- **Purpose**: Create comprehensive implementation plans
-
-### implement
-
-- **Trigger Phrases**: "implement the plan", "execute the plan", "build this"
-- **Purpose**: Execute plans with validation
-
 ## Installation
 
 ```bash
@@ -64,17 +51,55 @@ Or let the hook install it automatically via `npx` on first use.
 claude settings plugins add /path/to/plugins/dev-workflow
 
 # Or use --plugin-dir for testing
-cc --plugin-dir /path/to/plugins/dev-workflow
+claude --plugin-dir /path/to/plugins/dev-workflow
 ```
+
+## Skills
+
+| Skill          | Trigger Phrases                                                  | Purpose                                               |
+| -------------- | ---------------------------------------------------------------- | ----------------------------------------------------- |
+| `brainstorm`   | "brainstorm", "discuss an idea", "explore options"               | Interactive dialogue to reach a YAGNI solution        |
+| `load-context` | "load context", "load dev context", "inject context"             | Load dev principles and language conventions           |
+| `primer`       | "map the codebase", "prime context", "create architecture docs"  | Generate persistent context docs                      |
+| `plan-dev`     | "create a plan", "plan implementation", "design a feature"       | Create implementation plans with validation steps     |
+| `implement`    | "implement the plan", "execute the plan", "build this"           | Execute plans with mandatory validation iteration     |
+| `commit`       | "commit changes", "create a commit", "git commit"                | Atomic conventional commits with emoji indicators     |
+| `create-pr`    | "create a PR", "open a pull request", "create a merge request"   | PR/MR creation for GitHub and GitLab                  |
+| `readme`       | "create a README", "generate a README", "document this project"  | Standards-compliant README generation                 |
+
+## Hooks
+
+### PreToolUse (Security)
+
+| Matcher                    | Script                  | Purpose                                                  |
+| -------------------------- | ----------------------- | -------------------------------------------------------- |
+| `Write\|Edit`              | `block-config-edits.sh` | Block edits to CI/CD, lock files, infrastructure configs |
+| `Read\|Glob\|Grep\|Bash`  | `block-secret-reads.sh` | Block reads of .env, API keys, SSH keys, credentials     |
+
+Both security hooks have easily customizable pattern arrays at the top of
+each script. Edit the `BLOCKED_PATTERNS` / `BLOCKED_EXTENSIONS` arrays to
+add or remove protections for your team.
+
+### PostToolUse (Formatting)
+
+| Matcher       | Script            | Purpose                              |
+| ------------- | ----------------- | ------------------------------------ |
+| `Write\|Edit` | `lint-markdown.sh` | Auto-fix and report markdown lint issues |
+| `Write\|Edit` | `lint-python.sh`  | Auto-format Python files             |
 
 ## Workflow
 
-The three skills form a development workflow:
+The core skills form a development workflow:
 
 ```text
-1. /primer     → Understand the codebase, generate context docs
-2. /plan       → Design implementation strategy with validation
-3. /implement  → Execute plan with mandatory validation iteration
+1. /brainstorm    → Talk through ideas, reach a simple solution
+2. /load-context  → Inject language conventions into the session
+3. /primer        → Analyse codebase, generate context docs
+4. /plan-dev      → Design implementation strategy with validation
+5. /implement     → Execute plan with mandatory validation iteration
+6. /commit        → Create well-formatted atomic commits
+7. /create-pr     → Push and open a PR/MR with description
+8. /readme        → Generate or update project README
 ```
 
 ### Primer
@@ -105,9 +130,12 @@ Executes plans or inline instructions:
 
 ## Output Locations
 
-- **primer**: `.agents/context/*.md`
-- **plan**: `.agents/plans/*.md`
-- **implement**: Code changes + validation report
+| Skill       | Output                              |
+| ----------- | ----------------------------------- |
+| `primer`    | `.agents/context/*.md`              |
+| `plan-dev`  | `.agents/plans/*.md`                |
+| `brainstorm`| `.agents/brainstorms/*.md`          |
+| `implement` | Code changes + validation report    |
 
 ## Requirements
 
