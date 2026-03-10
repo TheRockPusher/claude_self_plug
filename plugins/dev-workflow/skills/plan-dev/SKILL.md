@@ -1,6 +1,6 @@
 ---
-name: plan
-description: Creates detailed implementation plans in .agents/plans/ through multi-phase analysis including codebase intelligence gathering, external research, and strategic planning with mandatory 5-level validation commands. Use when the user asks to "create a plan", "plan implementation", "design a feature", "/plan", or mentions needing a comprehensive plan before coding.
+name: plan-dev
+description: Creates detailed implementation plans in .agents/plans/ through multi-phase analysis including codebase intelligence gathering, external research, and strategic planning with mandatory 5-level validation commands. Use when the user asks to "create a plan", "plan implementation", "design a feature", "/plan-dev", or mentions needing a comprehensive plan before coding.
 argument-hint: <feature-description | brainstorm-filename>
 allowed-tools: Read, Grep, Glob, Bash(git status*), Bash(git log*), Bash(git ls-files*), Bash(git diff*), Task, WebFetch, WebSearch, Write, AskUserQuestion
 context: fork

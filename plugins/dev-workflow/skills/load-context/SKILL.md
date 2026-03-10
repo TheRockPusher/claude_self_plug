@@ -1,6 +1,6 @@
 ---
-name: context
-description: Loads universal development principles and language-specific conventions based on detected project config files. Use when the user asks to "load context", "load dev context", "inject context", "/context", or when CLAUDE.md instructs "Always invoke /context at session start".
+name: load-context
+description: Loads universal development principles and language-specific conventions based on detected project config files. Use when the user asks to "load context", "load dev context", "inject context", "/load-context", or when CLAUDE.md instructs "Always invoke /load-context at session start".
 allowed-tools: Read, Glob
 ---
 
