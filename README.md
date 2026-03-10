@@ -12,9 +12,11 @@ A personal collection of plugins for [Claude Code](https://docs.anthropic.com/en
 
 This project uses additional Claude Code plugins for development:
 
-| Plugin                                                                                                           | Purpose                                                                                      | Installation                                         |
-| ---------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
-| [plugin-dev@claude-plugins-official](https://github.com/anthropics/claude-plugins/tree/main/plugins/plugin-dev) | Plugin development toolkit with agents, skills, and hooks for creating Claude Code plugins   | `/plugin install plugin-dev@claude-plugins-official` |
+| Plugin | Purpose | Installation |
+| ------ | ------- | ------------ |
+| [plugin-dev@claude-plugins-official](https://github.com/anthropics/claude-plugins/tree/main/plugins/plugin-dev) | Plugin development toolkit with agents, skills, and hooks for creating Claude Code plugins | `/plugin install plugin-dev@claude-plugins-official` |
+| [skill-creator@claude-plugins-official](https://github.com/anthropics/claude-plugins-official/tree/main/plugins/skill-creator) | Create, improve, and benchmark skills with evals and variance analysis | `/plugin install skill-creator@claude-plugins-official` |
+| [claude-md-management@claude-plugins-official](https://github.com/anthropics/claude-plugins-official/tree/main/plugins/claude-md-management) | Audit, improve, and maintain CLAUDE.md files; capture session learnings | `/plugin install claude-md-management@claude-plugins-official` |
 
 ## Other Useful Plugins
 
