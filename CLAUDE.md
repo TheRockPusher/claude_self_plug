@@ -148,7 +148,7 @@ The dev-workflow plugin implements a three-phase development workflow:
   - `CODE-MAP.md` — File organization
 - Uses AskUserQuestion for approval before writing
 
-### Phase 2: Plan (`/plan`)
+### Phase 2: Plan (`/plan-dev`)
 
 - Creates implementation plans in `.agents/plans/{feature-name}.md`
 - Launches parallel agents for codebase intelligence gathering

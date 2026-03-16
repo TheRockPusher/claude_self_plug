@@ -13,7 +13,7 @@ Reference this template when writing brainstorm documents to
 # Brainstorm: {Topic Title}
 
 > Generated: {date}
-> Status: Ready for /plan | Needs revision | Exploratory
+> Status: Ready for /plan-dev | Needs revision | Exploratory
 
 ## Problem Statement
 
@@ -133,12 +133,12 @@ Reference this template when writing brainstorm documents to
 
 ### Ready for Implementation
 
-{If status is "Ready for /plan":}
+{If status is "Ready for /plan-dev":}
 
 To proceed with implementation:
 
 ```bash
-/plan {this-brainstorm-topic}
+/plan-dev {this-brainstorm-topic}
 ```
 
 **Implementation hints**:
@@ -192,18 +192,18 @@ Before proceeding, resolve:
 
 ### Next Steps
 
-- Always include clear path to `/plan`
+- Always include clear path to `/plan-dev`
 - Note any prerequisites or dependencies
 - Estimate complexity to set expectations
 
-## Integration with /plan
+## Integration with /plan-dev
 
-The brainstorm document should provide `/plan` with:
+The brainstorm document should provide `/plan-dev` with:
 
 1. **Clear scope**: What to build, what not to build
 2. **Constraints**: Non-negotiables the plan must respect
 3. **Context**: Systems and patterns to consider
 4. **Direction**: The chosen approach to implement
 
-The `/plan` skill will read this document and translate it into
+The `/plan-dev` skill will read this document and translate it into
 actionable implementation tasks.

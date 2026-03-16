@@ -105,7 +105,7 @@ Create `.agents/brainstorms/{topic}.md` following the output template.
 The document should be:
 
 - Readable by humans (primary audience)
-- Ingestible by `/plan` skill for implementation
+- Ingestible by `/plan-dev` skill for implementation
 - Complete enough to revisit months later
 
 ## Referencing Previous Brainstorms
@@ -156,7 +156,7 @@ After writing the brainstorm document:
 **File**: .agents/brainstorms/{filename}.md
 **Solution**: {one-sentence summary}
 
-Ready for `/plan {filename}` when you want to proceed.
+Ready for `/plan-dev {filename}` when you want to proceed.
 ```
 
 ## Guidelines
