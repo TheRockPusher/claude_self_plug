@@ -2,7 +2,7 @@
 name: plan-dev
 description: Creates detailed implementation plans in .agents/plans/ through multi-phase analysis including codebase intelligence gathering, external research, and strategic planning with mandatory 5-level validation commands. Use when the user asks to "create a plan", "plan implementation", "design a feature", "/plan-dev", or mentions needing a comprehensive plan before coding.
 argument-hint: <feature-description | brainstorm-filename>
-allowed-tools: Read, Grep, Glob, Bash(git status*), Bash(git log*), Bash(git ls-files*), Bash(git diff*), Task, WebFetch, WebSearch, Write, AskUserQuestion
+allowed-tools: Read, Grep, Glob, Bash(git status*), Bash(git log*), Bash(git ls-files*), Bash(git diff*), Task, WebFetch, WebSearch, Write, AskUserQuestion, Skill
 context: fork
 model: opus
 ---
@@ -27,9 +27,17 @@ Use the template in `references/plan-template.md`.
 
 ## Process
 
-### Phase 0: Project Rules Check
+### Phase 0: Load Development Context
 
-**Mandatory first step:**
+**Mandatory first step — always run before anything else:**
+
+Invoke `/load-context` to load universal development principles (YAGNI, KISS,
+pure functions, error handling) and language-specific conventions based on
+detected project config files. This ensures the planning phase operates with
+consistent coding standards and avoids rediscovering conventions that are
+already codified.
+
+Then read project rules:
 
 1. Read `CLAUDE.md` or `AGENTS.md` if present
 2. Extract project-specific conventions and forbidden patterns

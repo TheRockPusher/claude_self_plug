@@ -2,7 +2,7 @@
 name: implement
 description: Executes plans from .agents/plans/ or inline feature requests with TodoWrite task tracking and mandatory 5-level validation iteration until all checks pass. Use when the user asks to "implement the plan", "execute the plan", "build this", "/implement", or mentions executing an implementation plan.
 argument-hint: [plan-name or feature-description]
-allowed-tools: Read, Write, Edit, Grep, Glob, Bash(uv*), Bash(npm*), Bash(node*), Bash(cargo*), Bash(go*), Bash(make*), Bash(markdownlint*), TodoWrite, AskUserQuestion
+allowed-tools: Read, Write, Edit, Grep, Glob, Bash(uv*), Bash(npm*), Bash(node*), Bash(cargo*), Bash(go*), Bash(make*), Bash(markdownlint*), TodoWrite, AskUserQuestion, Skill
 context: fork
 ---
 
@@ -21,7 +21,16 @@ When no plan file exists, gather context and implement directly from user instru
 
 ## Process
 
-### Phase 0: Input Validation
+### Phase 0: Load Development Context
+
+**Mandatory first step — always run before anything else:**
+
+Invoke `/load-context` to load universal development principles (YAGNI, KISS,
+pure functions, error handling) and language-specific conventions based on
+detected project config files. This grounds all implementation decisions in
+consistent coding standards before touching any code.
+
+### Phase 0.5: Input Validation
 
 **If plan file provided:**
 
