@@ -2,7 +2,7 @@
 name: brainstorm
 description: Facilitates highly interactive dialogue to reach a simple, YAGNI-compliant solution written to .agents/brainstorms/. Use when the user asks to "brainstorm", "discuss an idea", "explore options", "think through a problem", "/brainstorm", or mentions wanting to talk through a development idea, issue, or new functionality before planning.
 argument-hint: <topic> [--ref <previous-brainstorm>...]
-allowed-tools: Read, Grep, Glob, Bash(git ls-files*), AskUserQuestion, Write
+allowed-tools: Read, Grep, Glob, Bash(git ls-files*), Bash(git log*), Task, WebFetch, WebSearch, AskUserQuestion, Write
 context: fork
 model: opus
 ---
@@ -35,6 +35,68 @@ Initial questions to understand the space:
 3. "Who or what is affected by this problem?"
 
 **Use AskUserQuestion liberally.** Short, focused questions beat long lists.
+
+### Phase 1.5: Codebase Reconnaissance
+
+**Once the problem is understood, scout the codebase in parallel before
+diving into solution discussion.** This grounds the brainstorm in reality
+and prevents proposing solutions that clash with existing architecture.
+
+Spawn each scout as a **separate Task agent** (`subagent_type: "Explore"`)
+using the Task tool. Do NOT read codebase files yourself to scout — that
+defeats the purpose.
+
+**Why this matters:** Scouts grep, glob, and read dozens of files to map
+the landscape. If you do this inline, all that exploration noise floods
+your context window — the same window you need for the interactive
+brainstorm conversation. Task subagents run in **isolated contexts**: they
+absorb the exploration cost and return only a compact reading list. Your
+main context stays clean for dialogue with the user.
+
+**Spawn all three scouts in a single message** using the Task tool:
+
+```text
+Task 1 (subagent_type: "Explore"): "Scout how {topic area} is structured
+in this codebase. Return ONLY a list of file:line references with one-line
+reasons. Focus on: entry points, data flow, key abstractions."
+
+Task 2 (subagent_type: "Explore"): "Find existing implementations similar
+to {topic area}. Return ONLY file:line references showing naming conventions,
+error handling patterns, and relevant code examples."
+
+Task 3 (subagent_type: "Explore"): "Identify systems related to {topic area}.
+Return ONLY file:line references for: integration points, shared utilities,
+and components that would be affected by changes."
+```
+
+Each agent returns a **curated reading list** — file paths with line ranges
+and a one-line reason why each file matters. Nothing else.
+
+**After agents return**, read only the files they flagged as relevant.
+This keeps the main context lean — you load targeted slices of the
+codebase instead of exploring blindly.
+
+**Skip this phase if:**
+
+- The brainstorm is purely conceptual (no existing codebase involvement)
+- The user explicitly says they don't need code context
+- Primer docs in `.agents/context/` already cover the relevant area
+  comprehensively
+
+#### Optional: External Research
+
+If the problem involves unfamiliar libraries or external systems, spawn
+parallel **Task agents** (default general-purpose type) for research in the
+**same message** as the codebase scouts — same principle, isolated contexts:
+
+| Agent | Task |
+| --- | --- |
+| LLMs.txt | Fetch `https://{domain}/llms.txt` for AI-optimised docs |
+| Official Docs | Fetch relevant documentation sections |
+| Web Search | Search for prior art or known solutions |
+
+These run concurrently with codebase scouts — don't wait for one group to
+finish before launching the other.
 
 ### Phase 2: Constraint Gathering
 

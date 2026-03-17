@@ -87,29 +87,61 @@ Analyse the request:
 
 **If requirements are unclear**: Use AskUserQuestion before proceeding.
 
-### Phase 2: Codebase Intelligence Gathering
+### Phase 2 + 3: Codebase Intelligence & External Research (PARALLEL)
 
-Launch parallel **Explore agents** (Task tool with `subagent_type=Explore`):
+**Launch ALL agents from both codebase scouting and external research in a
+single message.** These are independent tasks — there is no reason to wait
+for codebase results before starting research or vice versa. Launching
+everything at once cuts wall-clock time dramatically.
 
-| Agent | Focus |
-| --- | --- |
-| Structure | Languages, frameworks, directory patterns, config files |
-| Patterns | Similar implementations, naming, error handling, logging |
-| Testing | Framework, structure, coverage, similar test examples |
-| Integration | Files needing updates, new files, registration patterns |
+#### Codebase Scouts — USE the Task tool, not inline reads
 
-**For each Explore agent, extract:**
+Spawn each scout as a **separate Task agent** (`subagent_type: "Explore"`).
+Do NOT read codebase files yourself to scout — that defeats the purpose.
 
-- Specific file paths with line numbers
-- Real code examples (not placeholders)
-- Anti-patterns to avoid
+**Why this matters:** Scouts explore broadly — grepping, globbing, reading
+dozens of files to understand the landscape. If you do this inline, all
+that exploration noise floods your context window and you lose room for
+the actual planning work. Task subagents run in **isolated contexts** — they
+absorb the exploration cost and return only a compact summary. Your main
+context stays clean for strategic thinking.
 
-**Note:** If primer context (Phase 0.5) already covers an area comprehensively,
-skip that agent and reference the primer docs instead.
+Each scout's output must be a **curated reading list** — file paths with
+line ranges and a one-line reason why each matters. Nothing else. No full
+file contents, no lengthy analysis.
 
-### Phase 3: External Research
+**Spawn all four scouts in a single message** using the Task tool:
 
-Launch parallel **general-purpose agents** (one per documentation source):
+```text
+Task 1 (subagent_type: "Explore"): "Scout the project structure for {feature}.
+Return ONLY a list of file:line references with one-line reasons. Focus on:
+languages, frameworks, directory patterns, config files, entry points."
+
+Task 2 (subagent_type: "Explore"): "Find existing implementations similar to
+{feature}. Return ONLY file:line references showing naming conventions, error
+handling patterns, and logging patterns."
+
+Task 3 (subagent_type: "Explore"): "Scout the testing setup. Return ONLY
+file:line references for: test framework config, test directory structure,
+similar test examples, coverage configuration."
+
+Task 4 (subagent_type: "Explore"): "Identify integration points for {feature}.
+Return ONLY file:line references for: files needing updates, registration
+patterns, config files to modify."
+```
+
+**After all scouts return:** Read only the flagged files/ranges. This
+becomes the plan's "Mandatory Reading" section — every file:line reference
+in the plan should come from what the scouts identified.
+
+**Skip scouts** for areas already covered by primer docs (Phase 0.5).
+
+#### External Research — also via Task tool, same message
+
+Spawn research agents as **separate Task agents** (default general-purpose
+type) in the **same message** as the codebase scouts. Same principle: they
+fetch and filter externally so your context only receives the distilled
+results.
 
 | Agent | Task |
 | --- | --- |
@@ -132,8 +164,9 @@ Launch parallel **general-purpose agents** (one per documentation source):
 - Common gotchas and known issues
 - Breaking changes and migration guides
 
-**Note:** Only launch agents for libraries/frameworks relevant to the feature.
-Skip agents for well-understood or already-documented dependencies.
+**Skip research agents** for well-understood or already-documented
+dependencies. Only launch agents for libraries/frameworks relevant to the
+feature.
 
 ### Phase 4: Strategic Thinking
 
