@@ -1,0 +1,9 @@
+{
+  "name": "other-skills",
+  "version": "0.1.0",
+  "description": "Collection of standalone skills: Excalidraw diagram generation with visual validation",
+  "author": {
+    "name": "TheRockPusher"
+  },
+  "keywords": ["skills", "excalidraw", "diagrams", "visualization"]
+}
