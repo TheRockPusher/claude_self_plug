@@ -60,9 +60,19 @@ For each file reference:
 
 This ensures pattern consistency across implementation.
 
-### Phase 2: Task Setup
+### Phase 2: Task Setup (MANDATORY — No Code Before Tasks)
 
-**Create tasks from "STEP-BY-STEP TASKS" section using TodoWrite:**
+**You MUST create a complete task list with TodoWrite before writing or editing
+any code.** This is non-negotiable regardless of input mode. No implementation
+work begins until every task is registered and the first is marked
+`in_progress`.
+
+The reason this matters: without upfront task decomposition, implementation
+drifts, steps get skipped, and progress becomes invisible to the user. A clear
+task list keeps both you and the user aligned on scope and progress throughout
+the entire implementation.
+
+**From a plan file — extract tasks from "STEP-BY-STEP TASKS":**
 
 ```text
 Example plan tasks:
@@ -70,14 +80,26 @@ Example plan tasks:
 ### UPDATE src/routes/api.py
 ### ADD tests/test_auth.py
 
-Becomes todos:
+Becomes TodoWrite entries:
 1. Create src/services/auth.py
 2. Update src/routes/api.py
 3. Add tests/test_auth.py
 4. Run validation commands
 ```
 
-Use TodoWrite to mark first task as `in_progress` before starting.
+**From inline instructions — decompose the request into discrete tasks:**
+
+1. Analyse the user's request and break it into atomic, ordered steps
+2. Include file creation, modification, test writing, and validation as
+   separate tasks
+3. If the decomposition is non-obvious, use AskUserQuestion to confirm the
+   task list with the user before proceeding
+
+**Then, for both modes:**
+
+- Call TodoWrite with ALL tasks at once so the full scope is visible upfront
+- Mark the first task as `in_progress`
+- Only then proceed to Phase 3
 
 ### Phase 3: Execute Tasks
 
